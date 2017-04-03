@@ -15,3 +15,40 @@ function Question (text, choices, answer) {
 Question.prototype.isCorrectAnswer = function (choice) {
     return this.answer === choice;
 };
+
+
+function Quiz (questions) {
+    this.score= 0;
+    this.questions = questions;
+    this.currentQuestionIndex=0;
+
+}
+
+//Check against the
+Quiz.prototype.guess = function(answer) {
+    if(this.getCurrentQuestion().isCorrectAnswer(answer)){
+        this.score++;
+    }
+//Move the currentQuestin Index forward by 1
+    this.currentQuestionIndex++;
+};
+
+Question.prototype.getCurrentQuestion = function() {
+    return this.questions[this.currentQuestionIndex];
+};
+
+Quiz.prototype.hasEnded = function(){
+    return this.currentQuestionIndex >=this.question.length;
+}
+
+//Create questions
+var questions = [
+    new Question ("Who was the first president of the United States?", ["George Washington", "Thomas Jefferson"], "George Washington"),
+    new Question("What is the answer to the ultimate Question of Life, the Universe and everything?", ["pi", "42"], "42")
+    ];
+
+//Create Quiz
+var quiz= new Quiz (questions);
+
+//Display Quiz
+QuizUI.displayNext();
